@@ -10,7 +10,18 @@ namespace Borderless1942;
 
 public static class Win32Extensions
 {
-	public static async ValueTask<Window> WaitForMainWindowAsync(this Process process)
+    public static Monitor GetPrimaryMonitor()
+    {
+        nint handle = PInvoke.MonitorFromPoint(new POINT
+        {
+            x = 0,
+            y = 0
+        }, 0);
+
+        return new(handle);
+    }
+
+    public static async ValueTask<Window> WaitForMainWindowAsync(this Process process)
 	{
 		while (process.MainWindowHandle == IntPtr.Zero)
 		{

@@ -1,6 +1,8 @@
-﻿MonitorFromWindow
+﻿MonitorFromPoint
+MonitorFromWindow
 GetMonitorInfo
 SetWindowPos
+SetProcessDPIAwareness
 SendMessage
 GetWindowInfo
 SetWindowLong
