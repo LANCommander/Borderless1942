@@ -8,6 +8,8 @@ var width = defaultWidth;
 var height = defaultHeight;
 var skipConfigEdits = false;
 
+List<string> additionalArgs = new();
+
 for (int i = 0; i < args.Length; i++)
 {
 	if (args[i].Equals("-width", StringComparison.OrdinalIgnoreCase) && i + 1 < args.Length)
@@ -28,6 +30,8 @@ for (int i = 0; i < args.Length; i++)
 	{
 		skipConfigEdits = true;
 	}
+	else
+		additionalArgs.Add(args[i]);
 }
 
 if (!skipConfigEdits)
@@ -73,8 +77,11 @@ if (!skipConfigEdits)
 // Start Process
 var processStartInfo = new ProcessStartInfo
 {
-	FileName = @"BF1942.exe"
+	FileName = @"BF1942.exe",
 };
+
+foreach (var arg in additionalArgs)
+	processStartInfo.ArgumentList.Add(arg);
 
 var process = Process.Start(processStartInfo)!;
 var keepAlive = true;
