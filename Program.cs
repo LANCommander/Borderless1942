@@ -22,7 +22,7 @@ window.RemoveBorders();
 while (keepAlive)
 {
 MainLoop:
-	UpdateWindowPosition(window);
+	UpdateWindowPosition(window, width, height);
 	await Task.Delay(100);
 
 	if (process.HasExited)
@@ -52,11 +52,10 @@ MainLoop:
     }
 }
 
-static void UpdateWindowPosition(Window window)
+static void UpdateWindowPosition(Window window, int width, int height)
 {
 	var monitorBounds = window.GetCurrentMonitor().GetBounds();
-	var windowBounds = window.GetBounds();
-	var x = monitorBounds.Width / 2 - windowBounds.Width / 2;
-	var y = monitorBounds.Height / 2 - windowBounds.Height / 2;
-	window.SetPosition(x, y);
+	var x = monitorBounds.Left + (monitorBounds.Width - width) / 2;
+	var y = monitorBounds.Top + (monitorBounds.Height - height) / 2;
+	window.SetPosition(x, y, width, height);
 }
