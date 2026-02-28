@@ -35,7 +35,7 @@ jobs:
     - name: Build
       run: dotnet publish -c Release --output ${{env.BUILD_ARTIFACT_PATH}} -r win-x64
     - name: Publish artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: Borderless1942-Executable
         path: ${{env.BUILD_ARTIFACT_PATH}}
